@@ -1,2 +1,3 @@
 # cg-readings-poller
-The connected garden censors data poller. Implemented as a serverless function
+The connected garden censors readings poller.
+Implemented as a serverless function.
