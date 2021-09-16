@@ -13,8 +13,8 @@ import java.util.Arrays;
 @ApplicationScoped
 public class PollerTaskService {
 
-    @Inject
-    Scheduler scheduler;
+//    @Inject
+//    Scheduler scheduler;
 
     public void onStart(@Observes StartupEvent event) throws SchedulerException {
         Arrays

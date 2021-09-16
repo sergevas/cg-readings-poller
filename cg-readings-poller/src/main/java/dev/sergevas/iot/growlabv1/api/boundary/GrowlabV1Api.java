@@ -33,10 +33,9 @@ import javax.ws.rs.*;
  * - GET Health checks
  */
 
-@RegisterRestClient
+@RegisterRestClient(configKey = "growlabv1-api")
 @RegisterProvider(ApiExceptionMapper.class)
-@Path("")
-public interface DefaultApi  {
+public interface GrowlabV1Api {
 
     /**
      * Get camera mode
