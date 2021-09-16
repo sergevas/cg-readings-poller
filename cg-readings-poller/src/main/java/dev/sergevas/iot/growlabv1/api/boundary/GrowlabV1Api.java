@@ -12,14 +12,12 @@
 
 package dev.sergevas.iot.growlabv1.api.boundary;
 
-import dev.sergevas.iot.growlabv1.api.model.CameraModeSetType;
-import dev.sergevas.iot.growlabv1.api.model.CameraModeType;
-import dev.sergevas.iot.growlabv1.api.model.SensorReadingsItemType;
-import dev.sergevas.iot.growlabv1.api.model.SensorReadingsType;
+import dev.sergevas.iot.growlabv1.api.model.*;
 import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import javax.ws.rs.*;
+import java.io.File;
 
 /**
  * OpenAPI spec for Raspberry Pi #growlab resources
@@ -57,7 +55,7 @@ public interface GrowlabV1Api {
     @GET
     @Path("/health")
     @Produces({ "application/json" })
-    public void getHealthChecks() throws ApiException, ProcessingException;
+    public HealthCheckSchema getHealthChecks() throws ApiException, ProcessingException;
 
     /**
      * Take and get an image from the Raspberry Pi camera
@@ -68,7 +66,7 @@ public interface GrowlabV1Api {
     @GET
     @Path("/actuators/camera/image")
     @Produces({ "application/octet-stream", "application/json" })
-    public void getImage() throws ApiException, ProcessingException;
+    public File getImage() throws ApiException, ProcessingException;
 
     /**
      * Get light intensity readings
