@@ -5,19 +5,21 @@ import dev.sergevas.iot.cg.readings.poller.boundary.RequirementsNotSatisfiedExce
 import java.util.Arrays;
 
 public enum TaskType {
-    LIGHT("LIGHT", "lightJob", "lightTrigger"),
-    THP("THP", "thpJobe", "thpTrigger"),
-    CAMERA_MODE("CAMERA_MODE", "cameraModeJob", "cameraModeTrigger"),
-    HEALTH("HEALTH", "healthJob", "healthTrigger");
+    LIGHT("LIGHT", "lightJob", "lightTrigger", 10),
+    THP("THP", "thpJobe", "thpTrigger", 10),
+    CAMERA_MODE("CAMERA_MODE", "cameraModeJob", "cameraModeTrigger", 30),
+    HEALTH("HEALTH", "healthJob", "healthTrigger", 30);
 
     private String code;
     private String jobName;
     private String triggerName;
+    private int intervalInSeconds;
 
-    private TaskType(String code, String jobName, String triggerName) {
+    private TaskType(String code, String jobName, String triggerName, int intervalInSeconds) {
         this.code = code;
         this.jobName = jobName;
         this.triggerName = triggerName;
+        this.intervalInSeconds = intervalInSeconds;
     }
 
     public String getCode() {
@@ -32,10 +34,14 @@ public enum TaskType {
         return triggerName;
     }
 
+    public int getIntervalInSeconds() {
+        return intervalInSeconds;
+    }
+
     public static TaskType getByCode(String code) {
         return Arrays.stream(TaskType.values())
-                .filter(tt -> tt.code.equals(code))
+                .filter(t -> t.code.equals(code))
                 .findAny()
-                .orElseThrow(() -> new RequirementsNotSatisfiedException("Illegal task code: " + code));
+                .orElseThrow(() -> new RequirementsNotSatisfiedException(String.format("Illegal task code [%s]", code)));
     }
 }

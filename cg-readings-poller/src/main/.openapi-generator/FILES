@@ -1,0 +1,9 @@
+java/dev/sergevas/iot/growlabv1/api/boundary/ApiException.java
+java/dev/sergevas/iot/growlabv1/api/boundary/ApiExceptionMapper.java
+java/dev/sergevas/iot/growlabv1/api/boundary/DefaultApi.java
+java/dev/sergevas/iot/growlabv1/api/model/ActuatorErrorType.java
+java/dev/sergevas/iot/growlabv1/api/model/CameraModeSetType.java
+java/dev/sergevas/iot/growlabv1/api/model/CameraModeType.java
+java/dev/sergevas/iot/growlabv1/api/model/SensorErrorType.java
+java/dev/sergevas/iot/growlabv1/api/model/SensorReadingsItemType.java
+java/dev/sergevas/iot/growlabv1/api/model/SensorReadingsType.java
