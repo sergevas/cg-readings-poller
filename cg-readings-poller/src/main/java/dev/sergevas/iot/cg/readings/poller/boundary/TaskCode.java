@@ -10,8 +10,9 @@ public class TaskCode {
         return code;
     }
 
-    public void setCode(String code) {
+    public TaskCode code(String code) {
         this.code = code;
+        return this;
     }
 
     @Override

@@ -5,10 +5,15 @@ import dev.sergevas.iot.cg.readings.poller.boundary.RequirementsNotSatisfiedExce
 import java.util.Arrays;
 
 public enum TaskType {
+
     LIGHT("LIGHT", "lightJob", "lightTrigger", 10),
-    THP("THP", "thpJobe", "thpTrigger", 10),
+    THP("THP", "thpJob", "thpTrigger", 10),
     CAMERA_MODE("CAMERA_MODE", "cameraModeJob", "cameraModeTrigger", 30),
+    CAMERA_IMAGE("CAMERA_IMAGE", "cameraImageJob", "cameraImageTrigger", 60),
     HEALTH("HEALTH", "healthJob", "healthTrigger", 30);
+
+    public static final String CG_READINGS_POLLER = "CG_READINGS_POLLER";
+    public static final String TASK_TYPE_CODE = "taskTypeCode";
 
     private String code;
     private String jobName;
@@ -43,5 +48,15 @@ public enum TaskType {
                 .filter(t -> t.code.equals(code))
                 .findAny()
                 .orElseThrow(() -> new RequirementsNotSatisfiedException(String.format("Illegal task code [%s]", code)));
+    }
+
+    @Override
+    public String toString() {
+        return "TaskType{" +
+                "code='" + code + '\'' +
+                ", jobName='" + jobName + '\'' +
+                ", triggerName='" + triggerName + '\'' +
+                ", intervalInSeconds=" + intervalInSeconds +
+                '}';
     }
 }
