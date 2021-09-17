@@ -17,6 +17,7 @@ public class WiremockGrowlabV1Api implements QuarkusTestResourceLifecycleManager
     public Map<String, String> start() {
         wireMockServer = new WireMockServer();
         wireMockServer.start();
+
         stubFor(get(urlEqualTo("/actuators/camera/mode"))
                 .willReturn(aResponse()
                         .withHeader("Content-Type", "application/json")
@@ -25,6 +26,7 @@ public class WiremockGrowlabV1Api implements QuarkusTestResourceLifecycleManager
                                 "    \"mode_timestamp\": \"2021-09-16T11:01:33.837497Z\"\n" +
                                 "}")
                         .withStatus(200)));
+
         stubFor(get(urlEqualTo("/health"))
                 .willReturn(aResponse()
                         .withHeader("Content-Type", "application/json")
@@ -81,6 +83,49 @@ public class WiremockGrowlabV1Api implements QuarkusTestResourceLifecycleManager
                         .withBody(new byte[]{0, 1, 2, 3, 4, 5, 6, 7})
                         .withStatus(200)));
 
+        stubFor(get(urlEqualTo("/sensors/light"))
+                .willReturn(aResponse()
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\n" +
+                                "    \"s_id\": null,\n" +
+                                "    \"s_type\": \"LIGHT\",\n" +
+                                "    \"s_data\": \"680.83\",\n" +
+                                "    \"s_timestamp\": \"2021-09-17T07:33:47.280603Z\"\n" +
+                                "}")
+                        .withStatus(200)));
+
+        stubFor(get(urlEqualTo("/sensors/thp"))
+                .willReturn(aResponse()
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\n" +
+                                "    \"s_readings\": [\n" +
+                                "        {\n" +
+                                "            \"s_id\": \"60\",\n" +
+                                "            \"s_type\": \"TEMP\",\n" +
+                                "            \"s_data\": \"20.152979624649742\",\n" +
+                                "            \"s_timestamp\": \"2021-09-17T07:42:57.919122Z\"\n" +
+                                "        },\n" +
+                                "        {\n" +
+                                "            \"s_id\": \"60\",\n" +
+                                "            \"s_type\": \"HUMID\",\n" +
+                                "            \"s_data\": \"46.3402342737451\",\n" +
+                                "            \"s_timestamp\": \"2021-09-17T07:42:57.919122Z\"\n" +
+                                "        },\n" +
+                                "        {\n" +
+                                "            \"s_id\": \"60\",\n" +
+                                "            \"s_type\": \"PRESS\",\n" +
+                                "            \"s_data\": \"100017.3369229056\",\n" +
+                                "            \"s_timestamp\": \"2021-09-17T07:42:57.919122Z\"\n" +
+                                "        }\n" +
+                                "    ]\n" +
+                                "}")
+                        .withStatus(200)));
+
+        stubFor(put(urlEqualTo("/actuators/camera/mode"))
+                .withHeader("Content-Type", containing("application/json"))
+                .withRequestBody(containing("{\"mode\":\"NORM\"}"))
+                .willReturn(aResponse()
+                        .withStatus(200)));
 
         return Collections.singletonMap("growlabv1-api/mp-rest/url", wireMockServer.baseUrl());
     }

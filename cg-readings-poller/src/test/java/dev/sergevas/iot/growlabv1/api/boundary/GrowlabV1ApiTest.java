@@ -1,16 +1,12 @@
 package dev.sergevas.iot.growlabv1.api.boundary;
 
-import dev.sergevas.iot.growlabv1.api.model.CameraModeType;
-import dev.sergevas.iot.growlabv1.api.model.HealthCheckSchema;
-import dev.sergevas.iot.growlabv1.api.model.HealthCheckSchemaChecks;
+import dev.sergevas.iot.growlabv1.api.model.*;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -107,17 +103,49 @@ class GrowlabV1ApiTest {
     }
 
     @Test
-    @Disabled
     void getLightIntensity() {
+        SensorReadingsItemType sensorReadingsItemType = this.growlabV1Api.getLightIntensity();
+        assertNull(sensorReadingsItemType.getsId());
+        assertEquals("LIGHT", sensorReadingsItemType.getsType());
+        assertEquals("680.83", sensorReadingsItemType.getsData());
+        assertEquals(OffsetDateTime.parse("2021-09-17T07:33:47.280603Z"), sensorReadingsItemType.getsTimestamp());
     }
 
     @Test
-    @Disabled
     void getThp() {
+        SensorReadingsType sensorReadingsType = this.growlabV1Api.getThp();
+
+        SensorReadingsItemType sensorReadingsItemTypeTemp = sensorReadingsType.getsReadings().stream()
+                .filter(r -> "TEMP".equals(r.getsType()))
+                .findAny()
+                .orElse(null);
+        assertNotNull(sensorReadingsItemTypeTemp);
+        assertEquals("60", sensorReadingsItemTypeTemp.getsId());
+        assertEquals("20.152979624649742", sensorReadingsItemTypeTemp.getsData());
+        assertEquals(OffsetDateTime.parse("2021-09-17T07:42:57.919122Z"), sensorReadingsItemTypeTemp.getsTimestamp());
+
+        SensorReadingsItemType sensorReadingsItemTypeHumid = sensorReadingsType.getsReadings().stream()
+                .filter(r -> "HUMID".equals(r.getsType()))
+                .findAny()
+                .orElse(null);
+        assertNotNull(sensorReadingsItemTypeHumid);
+        assertEquals("60", sensorReadingsItemTypeHumid.getsId());
+        assertEquals("46.3402342737451", sensorReadingsItemTypeHumid.getsData());
+        assertEquals(OffsetDateTime.parse("2021-09-17T07:42:57.919122Z"), sensorReadingsItemTypeHumid.getsTimestamp());
+
+        SensorReadingsItemType sensorReadingsItemTypePress = sensorReadingsType.getsReadings().stream()
+                .filter(r -> "PRESS".equals(r.getsType()))
+                .findAny()
+                .orElse(null);
+        assertNotNull(sensorReadingsItemTypePress);
+        assertEquals("60", sensorReadingsItemTypePress.getsId());
+        assertEquals("100017.3369229056", sensorReadingsItemTypePress.getsData());
+        assertEquals(OffsetDateTime.parse("2021-09-17T07:42:57.919122Z"), sensorReadingsItemTypePress.getsTimestamp());
     }
 
     @Test
-    @Disabled
     void putCameraMode() {
+        this.growlabV1Api.putCameraMode(new CameraModeSetType().mode(CameraModeSetType.ModeEnum.NORM));
+        assertTrue(true);
     }
 }
