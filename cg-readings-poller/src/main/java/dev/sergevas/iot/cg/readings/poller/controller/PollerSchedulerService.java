@@ -42,16 +42,24 @@ public class PollerSchedulerService {
                     try {
                         scheduler.scheduleJob(job, trigger);
                     } catch (SchedulerException se) {
-                        logger.error(String.format("Unable to schedule the job [%s]", t), se);
+                        throw new CgReadingsPollerException(String.format("Unable to schedule the job [%s]", t), se);
                     }
                 });
     }
 
-    public void putOnStandby() throws SchedulerException {
-        this.scheduler.standby();
+    public void putOnStandby() {
+        try {
+            this.scheduler.standby();
+        } catch (SchedulerException se) {
+            throw new CgReadingsPollerException(se);
+        }
     }
 
-    public void start() throws SchedulerException {
-        this.scheduler.start();
+    public void start() {
+        try {
+            this.scheduler.start();
+        } catch (SchedulerException se) {
+            throw new CgReadingsPollerException(se);
+        }
     }
 }

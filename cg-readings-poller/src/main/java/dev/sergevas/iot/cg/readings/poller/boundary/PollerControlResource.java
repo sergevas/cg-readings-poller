@@ -22,7 +22,7 @@ public class PollerControlResource {
     @PUT
     @Path("/standby")
     @Consumes(MediaType.TEXT_PLAIN)
-    public Response putOnStandbyPoller() throws Exception {
+    public Response putOnStandbyPoller() {
         logger.info("Put the poller on standby");
         pollerSchedulerService.putOnStandby();
         return Response
@@ -34,7 +34,7 @@ public class PollerControlResource {
     @PUT
     @Path("/start")
     @Consumes(MediaType.TEXT_PLAIN)
-    public Response startPoller() throws Exception {
+    public Response startPoller() {
         logger.info("Start the poller on standby");
         pollerSchedulerService.start();
         return Response
