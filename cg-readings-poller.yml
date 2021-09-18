@@ -8,3 +8,5 @@ functions:
     handler: ./cg-readings-poller
     image: cgsergevas/cg-readings-poller:latest
 
+    environment:
+      GROWLAB_V1_API_URL: http://192.168.1.72:8088/growlab/api/v1
