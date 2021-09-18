@@ -30,7 +30,7 @@ class GrowlabV1ApiTest {
     void getCameraMode() {
         CameraModeType cameraModeType = growlabV1Api.getCameraMode();
         assertNotNull(cameraModeType);
-        assertEquals(CameraModeType.ModeEnum.NORM, cameraModeType.getMode());
+        assertEquals(ModeEnum.NORM, cameraModeType.getMode());
         assertEquals(OffsetDateTime.parse("2021-09-16T11:01:33.837497Z"), cameraModeType.getModeTimestamp());
     }
 

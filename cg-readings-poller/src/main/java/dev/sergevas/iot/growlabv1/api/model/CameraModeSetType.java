@@ -13,15 +13,13 @@
 package dev.sergevas.iot.growlabv1.api.model;
 
 
-import io.quarkus.runtime.annotations.RegisterForReflection;
-
 import javax.json.bind.annotation.JsonbProperty;
 
 /**
   * The Raspberry Pi IR-CUT camera operation mode.
  **/
 
-@RegisterForReflection
+
 public class CameraModeSetType  {
 
     /**
