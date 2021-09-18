@@ -42,6 +42,10 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-vertx</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-quartz</artifactId>
     </dependency>
     <dependency>
@@ -93,45 +97,45 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>org.openapitools</groupId>
-        <artifactId>openapi-generator-maven-plugin</artifactId>
-        <version>${openapi-generator-maven-plugin.version}</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-            <configuration>
-              <inputSpec>${project.basedir}/src/main/resources/api/openapi.yml</inputSpec>
-              <generatorName>java</generatorName>
-              <generateApis>true</generateApis>
-              <generateModels>true</generateModels>
-              <generateApiTests>false</generateApiTests>
-              <generateModelTests>false</generateModelTests>
-              <generateApiDocumentation>false</generateApiDocumentation>
-              <generateModelDocumentation>false</generateModelDocumentation>
-              <verbose>false</verbose>
-              <skipValidateSpec>false</skipValidateSpec>
-              <apiPackage>dev.sergevas.iot.growlabv1.api.boundary</apiPackage>
-              <invokerPackage>dev.sergevas.iot.growlabv1.api.boundary</invokerPackage>
-              <modelPackage>dev.sergevas.iot.growlabv1.api.model</modelPackage>
-              <generateSupportingFiles>flase</generateSupportingFiles>
-              <output>${project.basedir}/src/main</output>
-              <skipIfSpecIsUnchanged>true</skipIfSpecIsUnchanged>
-              <environmentVariables>
-                <supportingFiles>ApiException.java,ApiExceptionMapper.java</supportingFiles>
-              </environmentVariables>
-              <configOptions>
-                <sourceFolder>java</sourceFolder>
-                <dateLibrary>java8</dateLibrary>
-                <library>microprofile</library>
-                <hideGenerationTimestamp>true</hideGenerationTimestamp>
-              </configOptions>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.openapitools</groupId>-->
+<!--        <artifactId>openapi-generator-maven-plugin</artifactId>-->
+<!--        <version>${openapi-generator-maven-plugin.version}</version>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <goals>-->
+<!--              <goal>generate</goal>-->
+<!--            </goals>-->
+<!--            <configuration>-->
+<!--              <inputSpec>${project.basedir}/src/main/resources/api/openapi.yml</inputSpec>-->
+<!--              <generatorName>java</generatorName>-->
+<!--              <generateApis>true</generateApis>-->
+<!--              <generateModels>true</generateModels>-->
+<!--              <generateApiTests>false</generateApiTests>-->
+<!--              <generateModelTests>false</generateModelTests>-->
+<!--              <generateApiDocumentation>false</generateApiDocumentation>-->
+<!--              <generateModelDocumentation>false</generateModelDocumentation>-->
+<!--              <verbose>false</verbose>-->
+<!--              <skipValidateSpec>false</skipValidateSpec>-->
+<!--              <apiPackage>dev.sergevas.iot.growlabv1.api.boundary</apiPackage>-->
+<!--              <invokerPackage>dev.sergevas.iot.growlabv1.api.boundary</invokerPackage>-->
+<!--              <modelPackage>dev.sergevas.iot.growlabv1.api.model</modelPackage>-->
+<!--              <generateSupportingFiles>flase</generateSupportingFiles>-->
+<!--              <output>${project.basedir}/src/main</output>-->
+<!--              <skipIfSpecIsUnchanged>true</skipIfSpecIsUnchanged>-->
+<!--              <environmentVariables>-->
+<!--                <supportingFiles>ApiException.java,ApiExceptionMapper.java</supportingFiles>-->
+<!--              </environmentVariables>-->
+<!--              <configOptions>-->
+<!--                <sourceFolder>java</sourceFolder>-->
+<!--                <dateLibrary>java8</dateLibrary>-->
+<!--                <library>microprofile</library>-->
+<!--                <hideGenerationTimestamp>true</hideGenerationTimestamp>-->
+<!--              </configOptions>-->
+<!--            </configuration>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
     </plugins>
   </build>
   <profiles>

@@ -9,18 +9,18 @@ public enum TaskType {
     LIGHT("LIGHT", "lightJob", "lightTrigger", 10),
     THP("THP", "thpJob", "thpTrigger", 10),
     CAMERA_MODE("CAMERA_MODE", "cameraModeJob", "cameraModeTrigger", 30),
-    CAMERA_IMAGE("CAMERA_IMAGE", "cameraImageJob", "cameraImageTrigger", 60),
+    CAMERA_IMAGE("CAMERA_IMAGE", "cameraImageJob", "cameraImageTrigger", 300),
     HEALTH("HEALTH", "healthJob", "healthTrigger", 30);
 
     public static final String CG_READINGS_POLLER = "CG_READINGS_POLLER";
-    public static final String TASK_TYPE_CODE = "taskTypeCode";
+    public static final String TASK_CODE = "taskCode";
 
     private String code;
     private String jobName;
     private String triggerName;
     private int intervalInSeconds;
 
-    private TaskType(String code, String jobName, String triggerName, int intervalInSeconds) {
+    TaskType(String code, String jobName, String triggerName, int intervalInSeconds) {
         this.code = code;
         this.jobName = jobName;
         this.triggerName = triggerName;

@@ -1,5 +1,6 @@
 package dev.sergevas.iot.growlabv1.api.boundary;
 
+import dev.sergevas.iot.growlabv1.api.model.ModeEnum;
 import dev.sergevas.iot.growlabv1.api.model.*;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
@@ -145,7 +146,7 @@ class GrowlabV1ApiTest {
 
     @Test
     void putCameraMode() {
-        this.growlabV1Api.putCameraMode(new CameraModeSetType().mode(CameraModeSetType.ModeEnum.NORM));
+        this.growlabV1Api.putCameraMode(new CameraModeSetType().mode(ModeEnum.NORM));
         assertTrue(true);
     }
 }

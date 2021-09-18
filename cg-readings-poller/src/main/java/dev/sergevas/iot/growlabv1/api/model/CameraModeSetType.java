@@ -13,66 +13,18 @@
 package dev.sergevas.iot.growlabv1.api.model;
 
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 import javax.json.bind.annotation.JsonbProperty;
-import javax.json.bind.annotation.JsonbTypeDeserializer;
-import javax.json.bind.annotation.JsonbTypeSerializer;
-import javax.json.bind.serializer.DeserializationContext;
-import javax.json.bind.serializer.JsonbDeserializer;
-import javax.json.bind.serializer.JsonbSerializer;
-import javax.json.bind.serializer.SerializationContext;
-import javax.json.stream.JsonGenerator;
-import javax.json.stream.JsonParser;
-import java.lang.reflect.Type;
 
 /**
   * The Raspberry Pi IR-CUT camera operation mode.
  **/
 
+@RegisterForReflection
 public class CameraModeSetType  {
-  
-  @JsonbTypeSerializer(ModeEnum.Serializer.class)
-  @JsonbTypeDeserializer(ModeEnum.Deserializer.class)
-  public enum ModeEnum {
 
-    NORM(String.valueOf("NORM")), NIGHT(String.valueOf("NIGHT"));    
-
-
-    String value;
-
-    ModeEnum (String v) {
-        value = v;
-    }
-
-    public String value() {
-        return value;
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(value);
-    }
-
-    public static final class Deserializer implements JsonbDeserializer<ModeEnum> {
-        @Override
-        public ModeEnum deserialize(JsonParser parser, DeserializationContext ctx, Type rtType) {
-            for (ModeEnum b : ModeEnum.values()) {
-                if (String.valueOf(b.value).equals(parser.getString())) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + parser.getString() + "'");
-        }
-    }
-
-    public static final class Serializer implements JsonbSerializer<ModeEnum> {
-        @Override
-        public void serialize(ModeEnum obj, JsonGenerator generator, SerializationContext ctx) {
-            generator.write(obj.value);
-        }
-    }
-  }
-
- /**
+    /**
    * The Raspberry Pi IR-CUT camera operation mode. Possible values:  - NORM - normal mode  - NIGHT - night mode
   **/
   @JsonbProperty("mode")

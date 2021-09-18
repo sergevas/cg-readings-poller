@@ -13,7 +13,6 @@
 package dev.sergevas.iot.growlabv1.api.boundary;
 
 import dev.sergevas.iot.growlabv1.api.model.*;
-import org.eclipse.microprofile.rest.client.annotation.RegisterProvider;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import javax.ws.rs.*;
@@ -32,7 +31,6 @@ import java.io.File;
  */
 
 @RegisterRestClient(configKey = "growlabv1-api")
-@RegisterProvider(ApiExceptionMapper.class)
 public interface GrowlabV1Api {
 
     /**
@@ -44,7 +42,7 @@ public interface GrowlabV1Api {
     @GET
     @Path("/actuators/camera/mode")
     @Produces({ "application/json" })
-    public CameraModeType getCameraMode() throws ApiException, ProcessingException;
+    CameraModeType getCameraMode() throws ApiException, ProcessingException;
 
     /**
      * Can be used to get health checks
@@ -55,7 +53,7 @@ public interface GrowlabV1Api {
     @GET
     @Path("/health")
     @Produces({ "application/json" })
-    public HealthCheckSchema getHealthChecks() throws ApiException, ProcessingException;
+    HealthCheckSchema getHealthChecks() throws ApiException, ProcessingException;
 
     /**
      * Take and get an image from the Raspberry Pi camera
@@ -66,7 +64,7 @@ public interface GrowlabV1Api {
     @GET
     @Path("/actuators/camera/image")
     @Produces({ "application/octet-stream", "application/json" })
-    public File getImage() throws ApiException, ProcessingException;
+    File getImage() throws ApiException, ProcessingException;
 
     /**
      * Get light intensity readings
@@ -77,7 +75,7 @@ public interface GrowlabV1Api {
     @GET
     @Path("/sensors/light")
     @Produces({ "application/json" })
-    public SensorReadingsItemType getLightIntensity() throws ApiException, ProcessingException;
+    SensorReadingsItemType getLightIntensity() throws ApiException, ProcessingException;
 
     /**
      * Get temperature, humidity and pressure readings
@@ -88,7 +86,7 @@ public interface GrowlabV1Api {
     @GET
     @Path("/sensors/thp")
     @Produces({ "application/json" })
-    public SensorReadingsType getThp() throws ApiException, ProcessingException;
+    SensorReadingsType getThp() throws ApiException, ProcessingException;
 
     /**
      * Set the camera operation mode
@@ -100,6 +98,6 @@ public interface GrowlabV1Api {
     @Path("/actuators/camera/mode")
     @Consumes({ "application/json" })
     @Produces({ "application/json" })
-    public void putCameraMode(CameraModeSetType cameraModeSetType) throws ApiException, ProcessingException;
+    void putCameraMode(CameraModeSetType cameraModeSetType) throws ApiException, ProcessingException;
 }
 
