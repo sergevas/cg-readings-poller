@@ -1,4 +1,4 @@
-package dev.sergevas.iot.cg.readings.poller.boundary;
+package dev.sergevas.iot.cg.readings.poller.model;
 
 import java.util.Objects;
 
