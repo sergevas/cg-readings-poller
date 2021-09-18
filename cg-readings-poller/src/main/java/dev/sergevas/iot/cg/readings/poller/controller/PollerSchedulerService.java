@@ -14,7 +14,7 @@ import java.util.Date;
 @ApplicationScoped
 public class PollerSchedulerService {
 
-    private static final int WAIT_BEFORE_START_MILLS = 10000;
+    private static final int WAIT_BEFORE_START_MILLS = 5000;
 
     @Inject
     Logger logger;
@@ -45,5 +45,13 @@ public class PollerSchedulerService {
                         logger.error(String.format("Unable to schedule the job [%s]", t), se);
                     }
                 });
+    }
+
+    public void putOnStandby() throws SchedulerException {
+        this.scheduler.standby();
+    }
+
+    public void start() throws SchedulerException {
+        this.scheduler.start();
     }
 }
