@@ -4,7 +4,7 @@ import dev.sergevas.iot.cg.readings.poller.controller.*;
 import dev.sergevas.iot.cg.readings.poller.model.TaskType;
 import dev.sergevas.iot.growlabv1.api.boundary.GrowlabV1Api;
 import io.quarkus.vertx.ConsumeEvent;
-import io.smallrye.mutiny.Uni;
+import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.infrastructure.Infrastructure;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jboss.logging.Logger;
@@ -44,9 +44,9 @@ public class GrowlabV1Service {
         TaskType taskType = Optional.ofNullable(TaskType.getByCode(taskCode))
                 .orElseThrow(() -> new RequirementsNotSatisfiedException(String
                         .format("Unable to find TaskType instance for taskCode [%s]", taskCode)));
-        Uni
-                .createFrom()
-                .item(taskType)
+        Multi
+                .createFrom().item(taskType)
+                .onOverflow().drop()
                 .emitOn(Infrastructure.getDefaultWorkerPool())
                 .subscribe()
                 .with(item -> this.processTaskType(taskType),
@@ -57,12 +57,16 @@ public class GrowlabV1Service {
         switch (taskType) {
             case LIGHT:
                 this.lightResponseHandler.handle(this.growlabV1Api.getLightIntensity());
+                break;
             case THP:
                 this.thpResponseHandler.handle(this.growlabV1Api.getThp());
+                break;
             case HEALTH:
                 this.healthResponseHandler.handle(this.growlabV1Api.getHealthChecks());
+                break;
             case CAMERA_MODE:
                 this.cameraModeResponseHandler.handle(this.growlabV1Api.getCameraMode());
+                break;
             case CAMERA_IMAGE:
                 this.imageResponseHandler.handle(this.growlabV1Api.getImage());
         }
