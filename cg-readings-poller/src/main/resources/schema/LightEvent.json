@@ -1,0 +1,35 @@
+{
+   "$schema":"http://json-schema.org/draft-07/schema#",
+   "id":"LightEvent.json",
+   "title":"LightEvent",
+   "description":"Represents an IoT device domain event, containing ambient light readings data, for communication support between components of the system",
+   "type":"object",
+   "extends": {
+     "type": "object",
+     "javaType": "dev.sergevas.iot.cg.readings.event.entity.BaseEvent"
+   },
+   "javaType":"dev.sergevas.iot.cg.readings.event.entity.LightEvent",
+   "additionalProperties":false,
+   "properties": {
+     "data": {
+       "type": "object",
+       "properties": {
+         "unit": {
+           "type": "string",
+           "description": "A unit of measurement name"
+         },
+         "value": {
+           "type": "number",
+           "description": "The readings value"
+         }
+       },
+       "required": [
+         "unit",
+         "value"
+       ]
+     }
+   },
+  "required": [
+    "data"
+  ]
+}

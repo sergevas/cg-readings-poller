@@ -1,0 +1,42 @@
+{
+   "$schema":"http://json-schema.org/draft-07/schema#",
+   "id":"BaseEvent.json",
+   "title":"BaseEvent",
+   "description":"Represents an IoT device base domain event for communication support between components of the system",
+   "type":"object",
+   "javaType":"dev.sergevas.iot.cg.readings.event.entity.BaseEvent",
+   "additionalProperties":false,
+   "properties": {
+     "event_id": {
+       "type": "string",
+       "description": "The event unique id"
+     },
+     "created_at": {
+       "type": "string",
+       "format": "dateTime",
+       "description": "The event creation timestamp"
+     },
+     "read_at": {
+       "type": "string",
+       "format": "dateTime",
+       "description": "The device data reading timestamp"
+     },
+     "device_id": {
+       "type": "string",
+       "description": "The unique id of the IoT device"
+     },
+     "devcie_name": {
+       "type": "string",
+       "description": "Device name"
+     },
+     "topic": {
+       "type": "string",
+       "description": "The event publish topic name"
+     }
+   },
+  "required": [
+    "event_id",
+    "read_at",
+    "created_at"
+  ]
+}

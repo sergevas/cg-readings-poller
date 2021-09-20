@@ -11,16 +11,24 @@
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <quarkus.version>2.2.2.Final</quarkus.version>
+    <quarkus.version>2.2.3.Final</quarkus.version>
     <surefire-plugin.version>2.22.2</surefire-plugin.version>
     <openapi-generator-maven-plugin.version>5.2.1</openapi-generator-maven-plugin.version>
     <wiremock.version>2.31.0</wiremock.version>
+    <jsonschema2pojo.version>1.1.1</jsonschema2pojo.version>
   </properties>
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>io.quarkus</groupId>
+        <groupId>io.quarkus.platform</groupId>
         <artifactId>quarkus-bom</artifactId>
+        <version>${quarkus.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.quarkus.platform</groupId>
+        <artifactId>quarkus-camel-bom</artifactId>
         <version>${quarkus.version}</version>
         <type>pom</type>
         <scope>import</scope>
@@ -47,6 +55,18 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-quartz</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel.quarkus</groupId>
+      <artifactId>camel-quarkus-nats</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel.quarkus</groupId>
+      <artifactId>camel-quarkus-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel.quarkus</groupId>
+      <artifactId>camel-quarkus-direct</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -97,6 +117,31 @@
           </execution>
         </executions>
       </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.jsonschema2pojo</groupId>-->
+<!--        <artifactId>jsonschema2pojo-maven-plugin</artifactId>-->
+<!--        <version>${jsonschema2pojo.version}</version>-->
+<!--        <configuration>-->
+<!--          <includeJsr303Annotations>true</includeJsr303Annotations>-->
+<!--          <sourceDirectory>${basedir}/src/main/resources/schema-->
+<!--          </sourceDirectory>-->
+<!--          <outputDirectory>${project.build.directory}/generated-sources/main/java-->
+<!--          </outputDirectory>-->
+<!--          <includeHashcodeAndEquals>true</includeHashcodeAndEquals>-->
+<!--          <useTitleAsClassname>true</useTitleAsClassname>-->
+<!--          <useCommonsLang3>true</useCommonsLang3>-->
+<!--          <initializeCollections>true</initializeCollections>-->
+<!--          <generateBuilders>true</generateBuilders>-->
+<!--          <serializable>true</serializable>-->
+<!--        </configuration>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <goals>-->
+<!--              <goal>generate</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
 <!--      <plugin>-->
 <!--        <groupId>org.openapitools</groupId>-->
 <!--        <artifactId>openapi-generator-maven-plugin</artifactId>-->
