@@ -7,11 +7,11 @@ import java.time.OffsetDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class LightEventTest {
+class ReadingsEventTest {
 
     @Test
     void testSerialize() {
-        LightEvent lightEvent = new LightEvent();
+        ReadingsEvent lightEvent = new ReadingsEvent();
         lightEvent.setEventId("07aa54a8-4833-4408-8161-8a908830423b");
         lightEvent.setCreatedAt(OffsetDateTime.now());
         lightEvent.setReadAt(OffsetDateTime.now());

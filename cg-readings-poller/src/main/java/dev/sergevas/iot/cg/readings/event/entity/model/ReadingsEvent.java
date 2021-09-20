@@ -15,7 +15,7 @@ import java.util.Objects;
  * for communication support between components of the system
  * 
  */
-public class LightEvent extends BaseEvent implements Serializable {
+public class ReadingsEvent extends BaseEvent implements Serializable {
 
     private final static long serialVersionUID = 190772222892827935L;
 
@@ -47,7 +47,7 @@ public class LightEvent extends BaseEvent implements Serializable {
         this.data = data;
     }
 
-    public LightEvent withData(DataItem data) {
+    public ReadingsEvent withData(DataItem data) {
         this.data = data;
         return this;
     }
@@ -57,7 +57,7 @@ public class LightEvent extends BaseEvent implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        LightEvent that = (LightEvent) o;
+        ReadingsEvent that = (ReadingsEvent) o;
         return Objects.equals(data, that.data);
     }
 
@@ -68,7 +68,7 @@ public class LightEvent extends BaseEvent implements Serializable {
 
     @Override
     public String toString() {
-        return "LightEvent{" +
+        return "ReadingsEvent{" +
                 "data=" + data +
                 '}';
     }
