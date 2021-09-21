@@ -1,4 +1,4 @@
-package dev.sergevas.iot.cg.readings.event.entity.model;
+package dev.sergevas.iot.cg.readings.event.model;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ class BaseEventTest {
                 .withCreatedAt(OffsetDateTime.now())
                 .withReadAt(OffsetDateTime.now())
                 .withDeviceId("growlab-v1-device_id")
-                .withDevcieName("growlab-v1-device_name")
+                .withDeviceName("growlab-v1-device_name")
                 .withTopic("cg/growlab-v1-device_id/tmp");
         String jsonSerialized = JsonbBuilder.create().toJson(baseEvent);
         assertNotNull(jsonSerialized);

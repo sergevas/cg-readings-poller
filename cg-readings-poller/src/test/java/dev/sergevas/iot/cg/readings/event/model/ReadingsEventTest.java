@@ -1,4 +1,4 @@
-package dev.sergevas.iot.cg.readings.event.entity.model;
+package dev.sergevas.iot.cg.readings.event.model;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ class ReadingsEventTest {
         lightEvent.setCreatedAt(OffsetDateTime.now());
         lightEvent.setReadAt(OffsetDateTime.now());
         lightEvent.setDeviceId("growlab-v1-device_id");
-        lightEvent.setDevcieName("growlab-v1-device_name");
+        lightEvent.setDeviceName("growlab-v1-device_name");
         lightEvent.setTopic("cg/growlab-v1-device_id/tmp");
         lightEvent.setData(new DataItem().withUnit("lx").withValue(Double.valueOf(48745.67)));
         String jsonSerialized = JsonbBuilder.create().toJson(lightEvent);

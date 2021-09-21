@@ -1,4 +1,4 @@
-package dev.sergevas.iot.cg.readings.poller.scheduler.controller;
+package dev.sergevas.iot.cg.readings.poller.scheduler.boundary;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.io.File;

@@ -1,4 +1,4 @@
-package dev.sergevas.iot.cg.readings.event.entity.model;
+package dev.sergevas.iot.cg.readings.event.model;
 
 import javax.json.bind.annotation.JsonbProperty;
 import java.io.Serializable;

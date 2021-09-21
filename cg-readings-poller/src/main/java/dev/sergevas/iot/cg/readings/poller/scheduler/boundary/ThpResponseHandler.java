@@ -1,4 +1,4 @@
-package dev.sergevas.iot.cg.readings.poller.scheduler.controller;
+package dev.sergevas.iot.cg.readings.poller.scheduler.boundary;
 
 import dev.sergevas.iot.cg.readings.poller.growlabv1.api.model.SensorReadingsType;
 

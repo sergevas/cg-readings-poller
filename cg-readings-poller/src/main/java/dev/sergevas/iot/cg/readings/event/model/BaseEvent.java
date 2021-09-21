@@ -1,5 +1,5 @@
 
-package dev.sergevas.iot.cg.readings.event.entity.model;
+package dev.sergevas.iot.cg.readings.event.model;
 
 import javax.json.bind.annotation.JsonbProperty;
 import javax.json.bind.annotation.JsonbPropertyOrder;
@@ -56,8 +56,8 @@ public class BaseEvent implements Serializable {
      * Device name
      * 
      */
-    @JsonbProperty("devcie_name")
-    private String devcieName;
+    @JsonbProperty("device_name")
+    private String deviceName;
     /**
      * The event publish topic name
      * 
@@ -159,20 +159,20 @@ public class BaseEvent implements Serializable {
      * Device name
      * 
      */
-    public String getDevcieName() {
-        return devcieName;
+    public String getdeviceName() {
+        return deviceName;
     }
 
     /**
      * Device name
      * 
      */
-    public void setDevcieName(String devcieName) {
-        this.devcieName = devcieName;
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName;
     }
 
-    public BaseEvent withDevcieName(String devcieName) {
-        this.devcieName = devcieName;
+    public BaseEvent withDeviceName(String deviceName) {
+        this.deviceName = deviceName;
         return this;
     }
 
@@ -206,13 +206,13 @@ public class BaseEvent implements Serializable {
                 && Objects.equals(createdAt, baseEvent.createdAt)
                 && Objects.equals(readAt, baseEvent.readAt)
                 && Objects.equals(deviceId, baseEvent.deviceId)
-                && Objects.equals(devcieName, baseEvent.devcieName)
+                && Objects.equals(deviceName, baseEvent.deviceName)
                 && Objects.equals(topic, baseEvent.topic);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eventId, createdAt, readAt, deviceId, devcieName, topic);
+        return Objects.hash(eventId, createdAt, readAt, deviceId, deviceName, topic);
     }
 
     @Override
@@ -222,7 +222,7 @@ public class BaseEvent implements Serializable {
                 ", createdAt=" + createdAt +
                 ", readAt=" + readAt +
                 ", deviceId='" + deviceId + '\'' +
-                ", devcieName='" + devcieName + '\'' +
+                ", deviceName='" + deviceName + '\'' +
                 ", topic='" + topic + '\'' +
                 '}';
     }
