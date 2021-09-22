@@ -69,7 +69,8 @@ public class ReadingsEvent extends BaseEvent implements Serializable {
     @Override
     public String toString() {
         return "ReadingsEvent{" +
-                "data=" + data +
+                super.toString() +
+                " data=" + data +
                 '}';
     }
 }

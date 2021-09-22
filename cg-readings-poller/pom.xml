@@ -13,22 +13,16 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <quarkus.version>2.2.3.Final</quarkus.version>
     <surefire-plugin.version>2.22.2</surefire-plugin.version>
-    <openapi-generator-maven-plugin.version>5.2.1</openapi-generator-maven-plugin.version>
     <wiremock.version>2.31.0</wiremock.version>
-    <jsonschema2pojo.version>1.1.1</jsonschema2pojo.version>
+    <jnats.version>2.12.0</jnats.version>
+    <!--    <openapi-generator-maven-plugin.version>5.2.1</openapi-generator-maven-plugin.version>-->
+    <!--    <jsonschema2pojo.version>1.1.1</jsonschema2pojo.version>-->
   </properties>
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>io.quarkus.platform</groupId>
         <artifactId>quarkus-bom</artifactId>
-        <version>${quarkus.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>io.quarkus.platform</groupId>
-        <artifactId>quarkus-camel-bom</artifactId>
         <version>${quarkus.version}</version>
         <type>pom</type>
         <scope>import</scope>
@@ -57,24 +51,9 @@
       <artifactId>quarkus-quartz</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.camel.quarkus</groupId>
-      <artifactId>camel-quarkus-nats</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel.quarkus</groupId>
-      <artifactId>camel-quarkus-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel.quarkus</groupId>
-      <artifactId>camel-quarkus-direct</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel.quarkus</groupId>
-      <artifactId>camel-quarkus-bean</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel.quarkus</groupId>
-      <artifactId>camel-quarkus-jsonb</artifactId>
+      <groupId>io.nats</groupId>
+      <artifactId>jnats</artifactId>
+      <version>${jnats.version}</version>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
