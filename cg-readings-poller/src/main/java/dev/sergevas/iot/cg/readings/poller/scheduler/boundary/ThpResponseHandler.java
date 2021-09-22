@@ -75,7 +75,7 @@ public class ThpResponseHandler implements GrowlabV1ApiResponseHandler<SensorRea
 
     public ReadingsEvent toTempReadingsEvent(SensorReadingsItemType sensorReadingsItemType) {
         ReadingsEvent readingsEvent = new ReadingsEventBuilder()
-                .sensorReadingsItemType(sensorReadingsItemType)
+                .data(sensorReadingsItemType.getsData())
                 .eventId(UUID.randomUUID().toString())
                 .deviceId(this.deviceId)
                 .deviceName(this.deviceName)
@@ -90,7 +90,7 @@ public class ThpResponseHandler implements GrowlabV1ApiResponseHandler<SensorRea
 
     public ReadingsEvent toHumidReadingsEvent(SensorReadingsItemType sensorReadingsItemType) {
         ReadingsEvent readingsEvent = new ReadingsEventBuilder()
-                .sensorReadingsItemType(sensorReadingsItemType)
+                .data(sensorReadingsItemType.getsData())
                 .eventId(UUID.randomUUID().toString())
                 .deviceId(this.deviceId)
                 .deviceName(this.deviceName)
@@ -105,7 +105,7 @@ public class ThpResponseHandler implements GrowlabV1ApiResponseHandler<SensorRea
 
     public ReadingsEvent toPressReadingsEvent(SensorReadingsItemType sensorReadingsItemType) {
         ReadingsEvent readingsEvent = new ReadingsEventBuilder()
-                .sensorReadingsItemType(sensorReadingsItemType)
+                .data(sensorReadingsItemType.getsData())
                 .eventId(UUID.randomUUID().toString())
                 .deviceId(this.deviceId)
                 .deviceName(this.deviceName)

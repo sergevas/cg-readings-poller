@@ -10,7 +10,6 @@ import java.util.function.Function;
 
 public class ReadingsEventBuilder {
 
-    private SensorReadingsItemType sensorReadingsItemType;
     private String sensorType;
     private String measurementUnit;
     private String eventId;
@@ -19,11 +18,7 @@ public class ReadingsEventBuilder {
     private String natsSubject;
     private OffsetDateTime createdAt;
     private OffsetDateTime readAt;
-
-    public ReadingsEventBuilder sensorReadingsItemType(SensorReadingsItemType sensorReadingsItemType) {
-        this.sensorReadingsItemType = sensorReadingsItemType;
-        return this;
-    }
+    private String data;
 
     public ReadingsEventBuilder sensorType(String sensorType) {
         this.sensorType = sensorType;
@@ -65,6 +60,11 @@ public class ReadingsEventBuilder {
         return this;
     }
 
+    public ReadingsEventBuilder data(String data) {
+        this.data = data;
+        return this;
+    }
+
     public <T> ReadingsEvent build(Function<String, T> transformer) {
         ReadingsEvent readingsEvent = new ReadingsEvent();
         readingsEvent.setEventId(eventId);
@@ -77,7 +77,7 @@ public class ReadingsEventBuilder {
                 .withType(sensorType)
                 .withUnit(measurementUnit)
                 .withValue(Optional
-                        .ofNullable(sensorReadingsItemType.getsData())
+                        .ofNullable(data)
                         .map(transformer::apply)
                         .orElse(null)));
         return readingsEvent;

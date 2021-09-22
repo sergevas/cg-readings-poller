@@ -44,7 +44,7 @@ public class LightResponseHandler implements GrowlabV1ApiResponseHandler<SensorR
 
     public ReadingsEvent toReadingsEvent(SensorReadingsItemType sensorReadingsItemType) {
         ReadingsEvent readingsEvent = new ReadingsEventBuilder()
-                .sensorReadingsItemType(sensorReadingsItemType)
+                .data(sensorReadingsItemType.getsData())
                 .eventId(UUID.randomUUID().toString())
                 .deviceId(this.deviceId)
                 .deviceName(this.deviceName)
