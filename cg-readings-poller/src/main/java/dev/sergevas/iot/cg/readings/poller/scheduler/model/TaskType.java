@@ -6,11 +6,11 @@ import java.util.Arrays;
 
 public enum TaskType {
 
-    LIGHT("LIGHT", "lightJob", "lightTrigger", 10),
-    THP("THP", "thpJob", "thpTrigger", 10),
-    CAMERA_MODE("CAMERA_MODE", "cameraModeJob", "cameraModeTrigger", 30),
-    CAMERA_IMAGE("CAMERA_IMAGE", "cameraImageJob", "cameraImageTrigger", 300),
-    HEALTH("HEALTH", "healthJob", "healthTrigger", 30);
+    LIGHT("LIGHT", "lightJob", "lightTrigger", 10, true),
+    THP("THP", "thpJob", "thpTrigger", 10, true),
+    CAMERA_MODE("CAMERA_MODE", "cameraModeJob", "cameraModeTrigger", 30, true),
+    CAMERA_IMAGE("CAMERA_IMAGE", "cameraImageJob", "cameraImageTrigger", 300, false),
+    HEALTH("HEALTH", "healthJob", "healthTrigger", 30,true);
 
     public static final String CG_READINGS_POLLER = "CG_READINGS_POLLER";
     public static final String TASK_CODE = "taskCode";
@@ -19,12 +19,14 @@ public enum TaskType {
     private String jobName;
     private String triggerName;
     private int intervalInSeconds;
+    private boolean isActive;
 
-    TaskType(String code, String jobName, String triggerName, int intervalInSeconds) {
+    TaskType(String code, String jobName, String triggerName, int intervalInSeconds, boolean isActive) {
         this.code = code;
         this.jobName = jobName;
         this.triggerName = triggerName;
         this.intervalInSeconds = intervalInSeconds;
+        this.isActive = isActive;
     }
 
     public String getCode() {
@@ -43,6 +45,10 @@ public enum TaskType {
         return intervalInSeconds;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
     public static TaskType getByCode(String code) {
         return Arrays.stream(TaskType.values())
                 .filter(t -> t.code.equals(code))
@@ -57,6 +63,7 @@ public enum TaskType {
                 ", jobName='" + jobName + '\'' +
                 ", triggerName='" + triggerName + '\'' +
                 ", intervalInSeconds=" + intervalInSeconds +
+                ", isActive=" + isActive +
                 '}';
     }
 }

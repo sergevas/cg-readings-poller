@@ -27,6 +27,13 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>io.quarkus.platform</groupId>
+        <artifactId>quarkus-camel-bom</artifactId>
+        <version>${quarkus.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <dependencies>
@@ -51,9 +58,24 @@
       <artifactId>quarkus-quartz</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.nats</groupId>
-      <artifactId>jnats</artifactId>
-      <version>${jnats.version}</version>
+      <groupId>org.apache.camel.quarkus</groupId>
+      <artifactId>camel-quarkus-nats</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel.quarkus</groupId>
+      <artifactId>camel-quarkus-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel.quarkus</groupId>
+      <artifactId>camel-quarkus-direct</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel.quarkus</groupId>
+      <artifactId>camel-quarkus-bean</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel.quarkus</groupId>
+      <artifactId>camel-quarkus-jsonb</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>

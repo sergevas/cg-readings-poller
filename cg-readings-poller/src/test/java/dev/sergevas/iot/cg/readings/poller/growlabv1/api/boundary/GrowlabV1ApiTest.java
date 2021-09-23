@@ -7,6 +7,8 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
+import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -36,7 +38,10 @@ class GrowlabV1ApiTest {
     @Test
     void getHealthChecks() {
 
-        HealthCheckSchema healthCheck = growlabV1Api.getHealthChecks();
+        Response response = growlabV1Api.getHealthChecks();
+        MultivaluedMap<String, Object> headers = response.getHeaders();
+        Object dateObj = headers.get("Date");
+        HealthCheckSchema healthCheck = response.readEntity(HealthCheckSchema.class);
 
         assertNotNull(healthCheck);
 

@@ -3,11 +3,13 @@ package dev.sergevas.iot.cg.readings.event.boundary;
 import io.nats.client.Connection;
 import io.nats.client.Nats;
 import io.nats.client.Options;
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.inject.Produces;
 import java.io.IOException;
 
+@RegisterForReflection
 public class NatsConnectionProducer {
 
     @ConfigProperty(name="nats.host")

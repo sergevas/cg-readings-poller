@@ -78,7 +78,7 @@ public class ReadingsEventBuilder {
                 .withUnit(measurementUnit)
                 .withValue(Optional
                         .ofNullable(data)
-                        .map(transformer::apply)
+                        .map(String::valueOf)
                         .orElse(null)));
         return readingsEvent;
     }

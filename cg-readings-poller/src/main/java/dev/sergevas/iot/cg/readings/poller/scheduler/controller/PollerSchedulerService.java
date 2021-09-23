@@ -25,6 +25,7 @@ public class PollerSchedulerService {
     public void onStart(@Observes StartupEvent event) {
         logger.info(PollerSchedulerService.class.getName() + ".onStart() " + event);
         Arrays.stream(TaskType.values())
+                .filter(TaskType::isActive)
                 .forEach(t -> {
                     logger.info("Have got TaskType instance: " + t);
                     JobDetail job = JobBuilder.newJob(BaseJob.class)

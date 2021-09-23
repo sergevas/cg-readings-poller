@@ -16,6 +16,7 @@ import dev.sergevas.iot.cg.readings.poller.growlabv1.api.model.*;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
 import java.io.File;
 
 /**
@@ -53,7 +54,7 @@ public interface GrowlabV1Api {
     @GET
     @Path("/health")
     @Produces({ "application/json" })
-    HealthCheckSchema getHealthChecks() throws ApiException, ProcessingException;
+    Response getHealthChecks() throws ApiException, ProcessingException;
 
     /**
      * Take and get an image from the Raspberry Pi camera
