@@ -24,9 +24,6 @@ public class LightResponseHandler implements GrowlabV1ApiResponseHandler<SensorR
     @ConfigProperty(name="device.name.growlabv1")
     String deviceName;
 
-    @ConfigProperty(name="cg.nats.subject.growlabv1.light")
-    String natsSubject;
-
     @Inject
     ReadingsEventNatsAdapter readingsEventAdapter;
 
@@ -44,7 +41,6 @@ public class LightResponseHandler implements GrowlabV1ApiResponseHandler<SensorR
                 .eventId(UUID.randomUUID().toString())
                 .deviceId(this.deviceId)
                 .deviceName(this.deviceName)
-                .natsSubject(natsSubject)
                 .createdAt(OffsetDateTime.now(ZoneId.of("GMT")))
                 .readAt(sensorReadingsItemType.getsTimestamp())
                 .sensorType(LIGHT)

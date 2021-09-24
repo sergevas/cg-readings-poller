@@ -25,9 +25,6 @@ public class HealthResponseHandler implements GrowlabV1ApiResponseHandler<Respon
     @ConfigProperty(name="device.name.growlabv1")
     String deviceName;
 
-    @ConfigProperty(name="cg.nats.subject.growlabv1.health")
-    String natsSubject;
-
     @Inject
     ReadingsEventNatsAdapter readingsEventAdapter;
 
@@ -46,7 +43,6 @@ public class HealthResponseHandler implements GrowlabV1ApiResponseHandler<Respon
                 .eventId(UUID.randomUUID().toString())
                 .deviceId(this.deviceId)
                 .deviceName(this.deviceName)
-                .natsSubject(natsSubject)
                 .createdAt(OffsetDateTime.now(ZoneId.of("GMT")))
                 .readAt(OffsetDateTime.ofInstant(response.getDate().toInstant(), ZoneId.of("GMT")))
                 .sensorType(HEALTH)

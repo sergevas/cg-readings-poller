@@ -12,8 +12,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.UUID;
 
-import static dev.sergevas.iot.cg.readings.event.model.MeasurementUnits.LUX;
-import static dev.sergevas.iot.cg.readings.event.model.SensorTypes.LIGHT;
+import static dev.sergevas.iot.cg.readings.event.model.SensorTypes.CAMERA_MODE;
 
 @ApplicationScoped
 public class CameraModeResponseHandler implements GrowlabV1ApiResponseHandler<CameraModeType> {
@@ -23,9 +22,6 @@ public class CameraModeResponseHandler implements GrowlabV1ApiResponseHandler<Ca
 
     @ConfigProperty(name="device.name.growlabv1")
     String deviceName;
-
-    @ConfigProperty(name="cg.nats.subject.growlabv1.cam.mode")
-    String natsSubject;
 
     @Inject
     ReadingsEventNatsAdapter readingsEventAdapter;
@@ -44,11 +40,9 @@ public class CameraModeResponseHandler implements GrowlabV1ApiResponseHandler<Ca
                 .eventId(UUID.randomUUID().toString())
                 .deviceId(this.deviceId)
                 .deviceName(this.deviceName)
-                .natsSubject(natsSubject)
                 .createdAt(OffsetDateTime.now(ZoneId.of("GMT")))
                 .readAt(sensorReadingsItemType.getModeTimestamp())
-                .sensorType(LIGHT)
-                .measurementUnit(LUX)
+                .sensorType(CAMERA_MODE)
                 .build(Double::valueOf);
         return readingsEvent;
     }

@@ -21,6 +21,9 @@ public class ReadingsEventNatsAdapter {
     @ConfigProperty(name="nats.max.reconnects")
     Integer natsMaxReconnects;
 
+    @ConfigProperty(name="nats.subject.cg.growlabv1")
+    String natsSubjectCgGrowlabv1;
+
     @Produce(DIRECT_SEND_READINGS_EVENT)
     ReadingsEventListener readingsEventListener;
 
@@ -30,6 +33,10 @@ public class ReadingsEventNatsAdapter {
 
     public Integer natsMaxReconnects() {
         return natsMaxReconnects;
+    }
+
+    public String natsSubjectCgGrowlabv1() {
+        return natsSubjectCgGrowlabv1;
     }
 
     public void send(ReadingsEvent readingsEvent) {

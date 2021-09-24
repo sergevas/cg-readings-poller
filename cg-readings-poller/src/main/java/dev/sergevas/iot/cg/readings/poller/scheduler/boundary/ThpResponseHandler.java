@@ -26,15 +26,6 @@ public class ThpResponseHandler implements GrowlabV1ApiResponseHandler<SensorRea
     @ConfigProperty(name="device.name.growlabv1")
     String deviceName;
 
-    @ConfigProperty(name="cg.nats.subject.growlabv1.temp")
-    String natsSubjectTemp;
-
-    @ConfigProperty(name="cg.nats.subject.growlabv1.humid")
-    String natsSubjectHumid;
-
-    @ConfigProperty(name="cg.nats.subject.growlabv1.press")
-    String natsSubjectPress;
-
     @Inject
     ReadingsEventNatsAdapter readingsEventAdapter;
 
@@ -75,7 +66,6 @@ public class ThpResponseHandler implements GrowlabV1ApiResponseHandler<SensorRea
                 .eventId(UUID.randomUUID().toString())
                 .deviceId(this.deviceId)
                 .deviceName(this.deviceName)
-                .natsSubject(natsSubjectTemp)
                 .createdAt(OffsetDateTime.now(ZoneId.of("GMT")))
                 .readAt(sensorReadingsItemType.getsTimestamp())
                 .sensorType(TEMP)
@@ -90,7 +80,6 @@ public class ThpResponseHandler implements GrowlabV1ApiResponseHandler<SensorRea
                 .eventId(UUID.randomUUID().toString())
                 .deviceId(this.deviceId)
                 .deviceName(this.deviceName)
-                .natsSubject(natsSubjectHumid)
                 .createdAt(OffsetDateTime.now(ZoneId.of("GMT")))
                 .readAt(sensorReadingsItemType.getsTimestamp())
                 .sensorType(HUMID)
@@ -105,7 +94,6 @@ public class ThpResponseHandler implements GrowlabV1ApiResponseHandler<SensorRea
                 .eventId(UUID.randomUUID().toString())
                 .deviceId(this.deviceId)
                 .deviceName(this.deviceName)
-                .natsSubject(natsSubjectPress)
                 .createdAt(OffsetDateTime.now(ZoneId.of("GMT")))
                 .readAt(sensorReadingsItemType.getsTimestamp())
                 .sensorType(PRESS)
