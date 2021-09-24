@@ -12,11 +12,13 @@
 
 package dev.sergevas.iot.cg.readings.poller.growlabv1.api.model;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 import javax.json.bind.annotation.JsonbProperty;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@RegisterForReflection
 public class HealthCheckSchema  {
   
   @JsonbProperty("status")
@@ -24,8 +26,8 @@ public class HealthCheckSchema  {
 
   @JsonbProperty("checks")
   private List<HealthCheckSchemaChecks> checks = new ArrayList<>();
-  
- /**
+
+    /**
    * Get status
    * @return status
   **/

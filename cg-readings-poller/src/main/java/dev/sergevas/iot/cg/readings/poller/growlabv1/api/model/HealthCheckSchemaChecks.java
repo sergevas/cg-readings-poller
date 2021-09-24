@@ -13,9 +13,11 @@
 package dev.sergevas.iot.cg.readings.poller.growlabv1.api.model;
 
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 import javax.json.bind.annotation.JsonbProperty;
 
-
+@RegisterForReflection
 public class HealthCheckSchemaChecks  {
   
   @JsonbProperty("name")
@@ -26,8 +28,8 @@ public class HealthCheckSchemaChecks  {
 
   @JsonbProperty("data")
   private Object data;
-  
- /**
+
+    /**
    * Get name
    * @return name
   **/

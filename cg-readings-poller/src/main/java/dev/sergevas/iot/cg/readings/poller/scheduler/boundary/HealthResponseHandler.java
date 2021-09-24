@@ -1,7 +1,6 @@
 package dev.sergevas.iot.cg.readings.poller.scheduler.boundary;
 
-import dev.sergevas.iot.cg.readings.event.boundary.NatsAdapter;
-import dev.sergevas.iot.cg.readings.event.controller.DomainUtils;
+import dev.sergevas.iot.cg.readings.event.boundary.ReadingsEventNatsAdapter;
 import dev.sergevas.iot.cg.readings.event.controller.ReadingsEventBuilder;
 import dev.sergevas.iot.cg.readings.event.model.ReadingsEvent;
 import dev.sergevas.iot.cg.readings.poller.growlabv1.api.model.HealthCheckSchema;
@@ -30,17 +29,14 @@ public class HealthResponseHandler implements GrowlabV1ApiResponseHandler<Respon
     String natsSubject;
 
     @Inject
-    DomainUtils domainUtils;
-
-    @Inject
-    NatsAdapter natsAdapter;
+    ReadingsEventNatsAdapter readingsEventAdapter;
 
     @Override
     public void handle(Response response) {
         LOG.info("Have got a GrowlabV1Api response: " + response);
         ReadingsEvent readingsEvent = this.toReadingsEvent(response);
         LOG.info("Publish a readings event: " + readingsEvent);
-        natsAdapter.publish(natsSubject, domainUtils.serializeReadingsEvent(readingsEvent));
+        readingsEventAdapter.send(readingsEvent);
     }
 
     public ReadingsEvent toReadingsEvent(Response response) {

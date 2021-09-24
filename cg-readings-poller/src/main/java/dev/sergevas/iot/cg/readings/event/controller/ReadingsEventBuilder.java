@@ -2,7 +2,6 @@ package dev.sergevas.iot.cg.readings.event.controller;
 
 import dev.sergevas.iot.cg.readings.event.model.DataItem;
 import dev.sergevas.iot.cg.readings.event.model.ReadingsEvent;
-import dev.sergevas.iot.cg.readings.poller.growlabv1.api.model.SensorReadingsItemType;
 
 import java.time.OffsetDateTime;
 import java.util.Optional;

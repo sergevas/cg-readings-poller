@@ -1,7 +1,6 @@
 package dev.sergevas.iot.cg.readings.poller.scheduler.boundary;
 
-import dev.sergevas.iot.cg.readings.event.boundary.NatsAdapter;
-import dev.sergevas.iot.cg.readings.event.controller.DomainUtils;
+import dev.sergevas.iot.cg.readings.event.boundary.ReadingsEventNatsAdapter;
 import dev.sergevas.iot.cg.readings.event.controller.ReadingsEventBuilder;
 import dev.sergevas.iot.cg.readings.event.model.ReadingsEvent;
 import dev.sergevas.iot.cg.readings.poller.growlabv1.api.model.SensorReadingsItemType;
@@ -37,10 +36,7 @@ public class ThpResponseHandler implements GrowlabV1ApiResponseHandler<SensorRea
     String natsSubjectPress;
 
     @Inject
-    DomainUtils domainUtils;
-
-    @Inject
-    NatsAdapter natsAdapter;
+    ReadingsEventNatsAdapter readingsEventAdapter;
 
     @Override
     public void handle(SensorReadingsType response) {
@@ -53,7 +49,7 @@ public class ThpResponseHandler implements GrowlabV1ApiResponseHandler<SensorRea
                 .ifPresent(r -> {
                     ReadingsEvent readingsEvent = this.toTempReadingsEvent(r);
                     LOG.info("Publish a readings event: " + readingsEvent);
-                    natsAdapter.publish(natsSubjectTemp, domainUtils.serializeReadingsEvent(readingsEvent));
+                    readingsEventAdapter.send(readingsEvent);
                 });
         readings.stream()
                 .filter(r -> HUMID.equals(r.getsType()))
@@ -61,7 +57,7 @@ public class ThpResponseHandler implements GrowlabV1ApiResponseHandler<SensorRea
                 .ifPresent(r -> {
                     ReadingsEvent readingsEvent = this.toHumidReadingsEvent(r);
                     LOG.info("Publish a readings event: " + readingsEvent);
-                    natsAdapter.publish(natsSubjectHumid, domainUtils.serializeReadingsEvent(readingsEvent));
+                    readingsEventAdapter.send(readingsEvent);
                 });
         readings.stream()
                 .filter(r -> PRESS.equals(r.getsType()))
@@ -69,7 +65,7 @@ public class ThpResponseHandler implements GrowlabV1ApiResponseHandler<SensorRea
                 .ifPresent(r -> {
                     ReadingsEvent readingsEvent = this.toPressReadingsEvent(r);
                     LOG.info("Publish a readings event: " + readingsEvent);
-                    natsAdapter.publish(natsSubjectPress, domainUtils.serializeReadingsEvent(readingsEvent));
+                    readingsEventAdapter.send(readingsEvent);
                 });
     }
 
