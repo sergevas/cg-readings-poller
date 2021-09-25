@@ -10,3 +10,5 @@ functions:
 
     environment:
       GROWLAB_V1_API_URL: http://192.168.1.72:8088/growlab/api/v1
+      CG_NATS_SERVERS: "10.62.0.1"
+      CG_NATS_SUBJECT_GROWLABV1: cg.growlabv1
