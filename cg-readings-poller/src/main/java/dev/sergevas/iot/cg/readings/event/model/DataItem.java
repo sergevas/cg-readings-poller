@@ -1,11 +1,14 @@
 
 package dev.sergevas.iot.cg.readings.event.model;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 import javax.json.bind.annotation.JsonbProperty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
+@RegisterForReflection
 public class DataItem implements Serializable {
 
     private final static long serialVersionUID = -7616824780827883909L;

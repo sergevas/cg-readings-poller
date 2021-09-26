@@ -1,6 +1,8 @@
 
 package dev.sergevas.iot.cg.readings.event.model;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 import javax.json.bind.annotation.JsonbProperty;
 import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.json.bind.config.PropertyOrderStrategy;
@@ -17,6 +19,7 @@ import java.util.Objects;
  * 
  */
 
+@RegisterForReflection
 @JsonbPropertyOrder(PropertyOrderStrategy.LEXICOGRAPHICAL)
 public class BaseEvent implements Serializable {
 
