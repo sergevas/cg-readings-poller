@@ -17,7 +17,7 @@ public class ReadingsEventBuilder {
     private String natsSubject;
     private OffsetDateTime createdAt;
     private OffsetDateTime readAt;
-    private String data;
+    private Object data;
 
     public ReadingsEventBuilder sensorType(String sensorType) {
         this.sensorType = sensorType;
@@ -59,12 +59,12 @@ public class ReadingsEventBuilder {
         return this;
     }
 
-    public ReadingsEventBuilder data(String data) {
+    public ReadingsEventBuilder data(Object data) {
         this.data = data;
         return this;
     }
 
-    public <T> ReadingsEvent build(Function<String, T> transformer) {
+    public <T> ReadingsEvent build(Function<Object, T> transformer) {
         ReadingsEvent readingsEvent = new ReadingsEvent();
         readingsEvent.setEventId(eventId);
         readingsEvent.setDeviceId(deviceId);
@@ -77,7 +77,7 @@ public class ReadingsEventBuilder {
                 .withUnit(measurementUnit)
                 .withValue(Optional
                         .ofNullable(data)
-                        .map(String::valueOf)
+                        .map(d -> transformer.apply(d))
                         .orElse(null)));
         return readingsEvent;
     }

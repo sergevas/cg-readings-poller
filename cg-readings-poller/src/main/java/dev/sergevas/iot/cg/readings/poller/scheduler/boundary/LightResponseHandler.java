@@ -45,7 +45,7 @@ public class LightResponseHandler implements GrowlabV1ApiResponseHandler<SensorR
                 .readAt(sensorReadingsItemType.getsTimestamp())
                 .sensorType(LIGHT)
                 .measurementUnit(LUX)
-                .build(Double::valueOf);
+                .build(x -> x);
         return readingsEvent;
     }
 }

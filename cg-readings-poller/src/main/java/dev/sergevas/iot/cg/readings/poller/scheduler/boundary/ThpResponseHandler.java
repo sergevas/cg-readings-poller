@@ -70,7 +70,7 @@ public class ThpResponseHandler implements GrowlabV1ApiResponseHandler<SensorRea
                 .readAt(sensorReadingsItemType.getsTimestamp())
                 .sensorType(TEMP)
                 .measurementUnit(DEGREE_CELSIUS)
-                .build(Double::valueOf);
+                .build(x -> x);
         return readingsEvent;
     }
 
@@ -84,7 +84,7 @@ public class ThpResponseHandler implements GrowlabV1ApiResponseHandler<SensorRea
                 .readAt(sensorReadingsItemType.getsTimestamp())
                 .sensorType(HUMID)
                 .measurementUnit(PERCENTAGE)
-                .build(Double::valueOf);
+                .build(x -> x);
         return readingsEvent;
     }
 
@@ -98,7 +98,7 @@ public class ThpResponseHandler implements GrowlabV1ApiResponseHandler<SensorRea
                 .readAt(sensorReadingsItemType.getsTimestamp())
                 .sensorType(PRESS)
                 .measurementUnit(HECTOPASCAL)
-                .build(Double::valueOf);
+                .build(x -> x);
         return readingsEvent;
     }
 }

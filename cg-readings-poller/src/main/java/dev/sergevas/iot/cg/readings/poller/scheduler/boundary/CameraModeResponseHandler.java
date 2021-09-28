@@ -43,7 +43,7 @@ public class CameraModeResponseHandler implements GrowlabV1ApiResponseHandler<Ca
                 .createdAt(OffsetDateTime.now(ZoneId.of("GMT")))
                 .readAt(sensorReadingsItemType.getModeTimestamp())
                 .sensorType(CAMERA_MODE)
-                .build(Double::valueOf);
+                .build(x -> x);
         return readingsEvent;
     }
 }

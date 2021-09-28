@@ -8,7 +8,6 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.json.bind.JsonbBuilder;
 import javax.ws.rs.core.Response;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
@@ -39,14 +38,14 @@ public class HealthResponseHandler implements GrowlabV1ApiResponseHandler<Respon
     public ReadingsEvent toReadingsEvent(Response response) {
         HealthCheckSchema healthCheck = response.readEntity(HealthCheckSchema.class);
         ReadingsEvent readingsEvent = new ReadingsEventBuilder()
-                .data(JsonbBuilder.create().toJson(healthCheck))
+                .data(healthCheck)
                 .eventId(UUID.randomUUID().toString())
                 .deviceId(this.deviceId)
                 .deviceName(this.deviceName)
                 .createdAt(OffsetDateTime.now(ZoneId.of("GMT")))
                 .readAt(OffsetDateTime.ofInstant(response.getDate().toInstant(), ZoneId.of("GMT")))
                 .sensorType(HEALTH)
-                .build(String::valueOf);
+                .build(x -> x);
         return readingsEvent;
     }
 }
