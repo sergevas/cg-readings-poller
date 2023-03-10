@@ -17,9 +17,11 @@ public class ReadingsEventHelper {
     ReadingsEventNatsAdapter readingsEventNatsAdapter;
 
     public String topic(ReadingsEvent readingsEvent) {
-        return new StringBuilder(readingsEventNatsAdapter.natsSubjectGrowlabv1())
+        String topic = new StringBuilder(readingsEventNatsAdapter.natsSubjectGrowlabv1())
                 .append(".")
                 .append(readingsEvent.getData().getType())
                 .toString();
+        System.out.println(topic);
+        return topic;
     }
 }

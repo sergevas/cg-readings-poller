@@ -18,6 +18,8 @@ public class NatsReadingsEventSender extends RouteBuilder {
         from(DIRECT_SEND_READINGS_EVENT)
                 .setHeader(NATS_TOPIC, simple("${bean:readingsEventHelper?method=topic}"))
                 .marshal().json(JsonLibrary.Jsonb)
-                .toD("nats:${header.NATS_TOPIC}?servers=${bean:readingsEventNatsAdapter?method=natsServers}&maxReconnectAttempts=${bean:readingsEventNatsAdapter?method=natsMaxReconnects}&exchangePattern=InOnly");
+                .toD("nats:${header.NATS_TOPIC}?servers=${bean:readingsEventNatsAdapter?method=natsServers}" +
+                        "&maxReconnectAttempts=${bean:readingsEventNatsAdapter?method=natsMaxReconnects}&exchangePattern=InOnly" +
+                        "&headerFilterStrategy=#removeAllHeaderFilterStrategy");
     }
 }
