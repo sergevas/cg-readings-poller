@@ -14,7 +14,7 @@ public class DataItem implements Serializable {
     private final static long serialVersionUID = -7616824780827883909L;
 
     /**
-     * A type of a sensor or device
+     * A type of sensor or device
      * (Required)
      *
      */
@@ -40,7 +40,7 @@ public class DataItem implements Serializable {
     private Object value;
 
     /**
-     * A type of a sensor or device
+     * A type of sensor or device
      * (Required)
      *
      */
@@ -49,7 +49,7 @@ public class DataItem implements Serializable {
     }
 
     /**
-     * A type of a sensor or device
+     * A type of sensor or device
      * (Required)
      *
      */

@@ -5,6 +5,7 @@ import dev.sergevas.iot.cg.readings.event.controller.ReadingsEventBuilder;
 import dev.sergevas.iot.cg.readings.event.model.ReadingsEvent;
 import dev.sergevas.iot.cg.readings.poller.growlabv1.api.model.SensorReadingsItemType;
 import dev.sergevas.iot.cg.readings.poller.growlabv1.api.model.SensorReadingsType;
+import dev.sergevas.iot.cg.readings.shared.boundary.GrowlabV1ReadingsHandler;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -18,7 +19,7 @@ import static dev.sergevas.iot.cg.readings.event.model.MeasurementUnits.*;
 import static dev.sergevas.iot.cg.readings.event.model.SensorTypes.*;
 
 @ApplicationScoped
-public class ThpResponseHandler implements GrowlabV1ApiResponseHandler<SensorReadingsType> {
+public class ThpResponseHandler implements GrowlabV1ReadingsHandler<SensorReadingsType> {
 
     @ConfigProperty(name="device.id.growlabv1")
     String deviceId;
@@ -39,7 +40,7 @@ public class ThpResponseHandler implements GrowlabV1ApiResponseHandler<SensorRea
                 .findAny()
                 .ifPresent(r -> {
                     ReadingsEvent readingsEvent = this.toTempReadingsEvent(r);
-                    LOG.info("Publish a readings event: " + readingsEvent);
+                    LOG.info("Publish readings event: " + readingsEvent);
                     readingsEventAdapter.send(readingsEvent);
                 });
         readings.stream()
@@ -47,7 +48,7 @@ public class ThpResponseHandler implements GrowlabV1ApiResponseHandler<SensorRea
                 .findAny()
                 .ifPresent(r -> {
                     ReadingsEvent readingsEvent = this.toHumidReadingsEvent(r);
-                    LOG.info("Publish a readings event: " + readingsEvent);
+                    LOG.info("Publish readings event: " + readingsEvent);
                     readingsEventAdapter.send(readingsEvent);
                 });
         readings.stream()
@@ -55,7 +56,7 @@ public class ThpResponseHandler implements GrowlabV1ApiResponseHandler<SensorRea
                 .findAny()
                 .ifPresent(r -> {
                     ReadingsEvent readingsEvent = this.toPressReadingsEvent(r);
-                    LOG.info("Publish a readings event: " + readingsEvent);
+                    LOG.info("Publish readings event: " + readingsEvent);
                     readingsEventAdapter.send(readingsEvent);
                 });
     }

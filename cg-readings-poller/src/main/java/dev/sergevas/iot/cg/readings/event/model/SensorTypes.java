@@ -9,4 +9,6 @@ public class SensorTypes {
     public static final String CAMERA_MODE = "CAMERA_MODE";
     public static final String CAMERA_IMAGE = "CAMERA_IMAGE";
     public static final String HEALTH = "HEALTH";
+    // The Grower Device (Grow Bag sensors)
+    public static final String GROWER = "GROWER";
 }

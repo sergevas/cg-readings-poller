@@ -4,6 +4,7 @@ import dev.sergevas.iot.cg.readings.event.boundary.ReadingsEventNatsAdapter;
 import dev.sergevas.iot.cg.readings.event.controller.ReadingsEventBuilder;
 import dev.sergevas.iot.cg.readings.event.model.ReadingsEvent;
 import dev.sergevas.iot.cg.readings.poller.growlabv1.api.model.SensorReadingsItemType;
+import dev.sergevas.iot.cg.readings.shared.boundary.GrowlabV1ReadingsHandler;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -16,7 +17,7 @@ import static dev.sergevas.iot.cg.readings.event.model.MeasurementUnits.LUX;
 import static dev.sergevas.iot.cg.readings.event.model.SensorTypes.LIGHT;
 
 @ApplicationScoped
-public class LightResponseHandler implements GrowlabV1ApiResponseHandler<SensorReadingsItemType> {
+public class LightResponseHandler implements GrowlabV1ReadingsHandler<SensorReadingsItemType> {
 
     @ConfigProperty(name="device.id.growlabv1")
     String deviceId;
@@ -28,10 +29,10 @@ public class LightResponseHandler implements GrowlabV1ApiResponseHandler<SensorR
     ReadingsEventNatsAdapter readingsEventAdapter;
 
     @Override
-    public void handle(SensorReadingsItemType response) {
-        LOG.info("Have got a GrowlabV1Api response: " + response);
-        ReadingsEvent readingsEvent = this.toReadingsEvent(response);
-        LOG.info("Publish a readings event: " + readingsEvent);
+    public void handle(SensorReadingsItemType readings) {
+        LOG.info("Have got a GrowlabV1Api response: " + readings);
+        ReadingsEvent readingsEvent = this.toReadingsEvent(readings);
+        LOG.info("Publish readings event: " + readingsEvent);
         readingsEventAdapter.send(readingsEvent);
     }
 
