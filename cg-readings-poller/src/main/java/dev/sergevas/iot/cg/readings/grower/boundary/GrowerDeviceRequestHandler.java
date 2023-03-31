@@ -33,7 +33,7 @@ public class GrowerDeviceRequestHandler implements GrowlabV1ReadingsHandler<Grow
                 .data(request)
                 .eventId(UUID.randomUUID().toString())
                 .deviceId(request.getDeviceId())
-                .deviceName(request.getDeviceLabel())
+                .deviceName(request.getDeviceName())
                 .createdAt(OffsetDateTime.now(ZoneId.of("GMT")))
                 .readAt(request.getDate())
                 .sensorType(GROWER)

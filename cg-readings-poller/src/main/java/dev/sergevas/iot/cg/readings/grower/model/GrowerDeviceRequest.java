@@ -11,7 +11,7 @@ public class GrowerDeviceRequest {
 
     private OffsetDateTime date;
     private String deviceId;
-    private String deviceLabel;
+    private String deviceName;
     private Double soilTemp;
     private Double soilMoisture;
     private String pumpStat;
@@ -19,7 +19,7 @@ public class GrowerDeviceRequest {
     public GrowerDeviceRequest(OffsetDateTime date, String deviceId, Double soilTemp, Double soilMoisture, String pumpStat) {
         this.date = date;
         this.deviceId = deviceId;
-        this.deviceLabel = GrowerDeviceLabel.getByDeviceId(deviceId).getDeviceLabel();
+        this.deviceName = GrowerDeviceName.getByDeviceId(deviceId).getDeviceName();
         this.soilTemp = soilTemp;
         this.soilMoisture = soilMoisture;
         this.pumpStat = pumpStat;
@@ -33,8 +33,8 @@ public class GrowerDeviceRequest {
         return deviceId;
     }
 
-    public String getDeviceLabel() {
-        return deviceLabel;
+    public String getDeviceName() {
+        return deviceName;
     }
 
     public Double getSoilTemp() {
@@ -54,12 +54,12 @@ public class GrowerDeviceRequest {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GrowerDeviceRequest that = (GrowerDeviceRequest) o;
-        return Objects.equals(date, that.date) && Objects.equals(deviceId, that.deviceId) && Objects.equals(deviceLabel, that.deviceLabel) && Objects.equals(soilTemp, that.soilTemp) && Objects.equals(soilMoisture, that.soilMoisture) && Objects.equals(pumpStat, that.pumpStat);
+        return Objects.equals(date, that.date) && Objects.equals(deviceId, that.deviceId) && Objects.equals(deviceName, that.deviceName) && Objects.equals(soilTemp, that.soilTemp) && Objects.equals(soilMoisture, that.soilMoisture) && Objects.equals(pumpStat, that.pumpStat);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(date, deviceId, deviceLabel, soilTemp, soilMoisture, pumpStat);
+        return Objects.hash(date, deviceId, deviceName, soilTemp, soilMoisture, pumpStat);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class GrowerDeviceRequest {
         return new StringJoiner(", ", GrowerDeviceRequest.class.getSimpleName() + "[", "]")
                 .add("date=" + date)
                 .add("deviceId='" + deviceId + "'")
-                .add("deviceLabel='" + deviceLabel + "'")
+                .add("deviceName='" + deviceName + "'")
                 .add("soilTemp=" + soilTemp)
                 .add("soilMoisture=" + soilMoisture)
                 .add("pumpStat='" + pumpStat + "'")
