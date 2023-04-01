@@ -18,6 +18,12 @@ public class ReadingsEventNatsAdapter {
     @ConfigProperty(name="nats.servers")
     String natsServers;
 
+    @ConfigProperty(name="nats.username")
+    String natsUserName;
+
+    @ConfigProperty(name="nats.password")
+    String natsPassword;
+
     @ConfigProperty(name="nats.max.reconnects")
     Integer natsMaxReconnects;
 
@@ -29,6 +35,14 @@ public class ReadingsEventNatsAdapter {
 
     public String natsServers() {
         return natsServers;
+    }
+
+    public String natsUserName() {
+        return natsUserName;
+    }
+
+    public String natsPassword() {
+        return natsPassword;
     }
 
     public Integer natsMaxReconnects() {
