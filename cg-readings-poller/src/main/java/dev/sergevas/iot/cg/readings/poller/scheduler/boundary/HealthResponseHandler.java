@@ -14,7 +14,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.UUID;
 
-import static dev.sergevas.iot.cg.readings.event.model.SensorTypes.HEALTH;
+import static dev.sergevas.iot.cg.readings.shared.model.SensorTypes.HEALTH;
 
 @ApplicationScoped
 public class HealthResponseHandler implements GrowlabV1ReadingsHandler<Response> {
@@ -24,6 +24,8 @@ public class HealthResponseHandler implements GrowlabV1ReadingsHandler<Response>
 
     @ConfigProperty(name="device.name.growlabv1")
     String deviceName;
+    @ConfigProperty(name="cg.nats.subject.root")
+    String rootNatsSubject;
 
     @Inject
     ReadingsEventNatsAdapter readingsEventAdapter;
@@ -38,7 +40,7 @@ public class HealthResponseHandler implements GrowlabV1ReadingsHandler<Response>
 
     public ReadingsEvent toReadingsEvent(Response response) {
         HealthCheckSchema healthCheck = response.readEntity(HealthCheckSchema.class);
-        ReadingsEvent readingsEvent = new ReadingsEventBuilder()
+        return new ReadingsEventBuilder()
                 .data(healthCheck)
                 .eventId(UUID.randomUUID().toString())
                 .deviceId(this.deviceId)
@@ -46,7 +48,15 @@ public class HealthResponseHandler implements GrowlabV1ReadingsHandler<Response>
                 .createdAt(OffsetDateTime.now(ZoneId.of("GMT")))
                 .readAt(OffsetDateTime.ofInstant(response.getDate().toInstant(), ZoneId.of("GMT")))
                 .sensorType(HEALTH)
+                .natsSubject(createSubjectName(HEALTH))
                 .build(x -> x);
-        return readingsEvent;
+    }
+
+    public String createSubjectName(String sensorType) {
+        return rootNatsSubject +
+                "." +
+                deviceName +
+                "." +
+                sensorType;
     }
 }

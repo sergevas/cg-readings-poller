@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 
@@ -16,8 +15,13 @@ public class GrowerDataReceiverResource {
 
     @Inject
     Logger logger;
+
     @Inject
-    GrowerDeviceRequestHandler growerDeviceRequestHandler;
+    GrowerDeviceSoilTempHandler growerDeviceSoilTempHandler;
+    @Inject
+    GrowerDeviceSoilMoistureHandler growerDeviceSoilMoistureHandler;
+    @Inject
+    GrowerDevicePumpStateHandler growerDevicePumpStateHandler;
 
     @GET
     @Path("/{deviceId}")
@@ -32,7 +36,9 @@ public class GrowerDataReceiverResource {
         GrowerDeviceRequest growerDeviceRequest = new GrowerDeviceRequest(OffsetDateTime.now(ZoneId.of("GMT")),
                 deviceId, soilTemp, soilMoisture, pumpState);
         logger.info(growerDeviceRequest);
-        growerDeviceRequestHandler.handle(growerDeviceRequest);
+        growerDeviceSoilTempHandler.handle(growerDeviceRequest);
+        growerDeviceSoilMoistureHandler.handle(growerDeviceRequest);
+        growerDevicePumpStateHandler.handle(growerDeviceRequest);
         return Response
                 .noContent()
                 .status(Response.Status.OK)

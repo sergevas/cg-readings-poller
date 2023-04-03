@@ -1,4 +1,3 @@
-
 package dev.sergevas.iot.cg.readings.event.model;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
@@ -16,7 +15,6 @@ import java.util.Objects;
  * BaseEvent
  * <p>
  * Represents an IoT device base domain event for communication support between components of the system
- * 
  */
 
 @RegisterForReflection
@@ -28,7 +26,6 @@ public class BaseEvent implements Serializable {
     /**
      * The event unique id
      * (Required)
-     * 
      */
     @JsonbProperty("event_id")
     @NotNull
@@ -36,7 +33,6 @@ public class BaseEvent implements Serializable {
     /**
      * The event creation timestamp
      * (Required)
-     * 
      */
     @JsonbProperty("created_at")
     @NotNull
@@ -44,26 +40,27 @@ public class BaseEvent implements Serializable {
     /**
      * The device data reading timestamp
      * (Required)
-     * 
      */
     @JsonbProperty("read_at")
     @NotNull
     private OffsetDateTime readAt;
     /**
      * The unique id of the IoT device
-     * 
      */
     @JsonbProperty("device_id")
     private String deviceId;
     /**
      * Device name
-     * 
      */
     @JsonbProperty("device_name")
     private String deviceName;
     /**
+     * Device type
+     */
+    @JsonbProperty("device_type")
+    private String deviceType;
+    /**
      * The event publish topic name
-     * 
      */
     @JsonbProperty("topic")
     private String topic;
@@ -71,7 +68,6 @@ public class BaseEvent implements Serializable {
     /**
      * The event unique id
      * (Required)
-     * 
      */
     public String getEventId() {
         return eventId;
@@ -80,7 +76,6 @@ public class BaseEvent implements Serializable {
     /**
      * The event unique id
      * (Required)
-     * 
      */
     public void setEventId(String eventId) {
         this.eventId = eventId;
@@ -94,7 +89,6 @@ public class BaseEvent implements Serializable {
     /**
      * The event creation timestamp
      * (Required)
-     * 
      */
     public OffsetDateTime getCreatedAt() {
         return createdAt;
@@ -103,7 +97,6 @@ public class BaseEvent implements Serializable {
     /**
      * The event creation timestamp
      * (Required)
-     * 
      */
     public void setCreatedAt(OffsetDateTime createdAt) {
         this.createdAt = createdAt;
@@ -117,7 +110,6 @@ public class BaseEvent implements Serializable {
     /**
      * The device data reading timestamp
      * (Required)
-     * 
      */
     public OffsetDateTime getReadAt() {
         return readAt;
@@ -126,7 +118,6 @@ public class BaseEvent implements Serializable {
     /**
      * The device data reading timestamp
      * (Required)
-     * 
      */
     public void setReadAt(OffsetDateTime readAt) {
         this.readAt = readAt;
@@ -139,7 +130,6 @@ public class BaseEvent implements Serializable {
 
     /**
      * The unique id of the IoT device
-     * 
      */
     public String getDeviceId() {
         return deviceId;
@@ -147,7 +137,6 @@ public class BaseEvent implements Serializable {
 
     /**
      * The unique id of the IoT device
-     * 
      */
     public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
@@ -160,7 +149,6 @@ public class BaseEvent implements Serializable {
 
     /**
      * Device name
-     * 
      */
     public String getdeviceName() {
         return deviceName;
@@ -168,7 +156,6 @@ public class BaseEvent implements Serializable {
 
     /**
      * Device name
-     * 
      */
     public void setDeviceName(String deviceName) {
         this.deviceName = deviceName;
@@ -180,8 +167,26 @@ public class BaseEvent implements Serializable {
     }
 
     /**
+     * Device name
+     */
+    public String getdeviceType() {
+        return deviceType;
+    }
+
+    /**
+     * Device name
+     */
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
+    }
+
+    public BaseEvent withDeviceType(String deviceType) {
+        this.deviceType = deviceType;
+        return this;
+    }
+
+    /**
      * The event publish topic name
-     * 
      */
     public String getTopic() {
         return topic;
@@ -189,7 +194,6 @@ public class BaseEvent implements Serializable {
 
     /**
      * The event publish topic name
-     * 
      */
     public void setTopic(String topic) {
         this.topic = topic;
@@ -205,17 +209,15 @@ public class BaseEvent implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BaseEvent baseEvent = (BaseEvent) o;
-        return Objects.equals(eventId, baseEvent.eventId)
-                && Objects.equals(createdAt, baseEvent.createdAt)
-                && Objects.equals(readAt, baseEvent.readAt)
-                && Objects.equals(deviceId, baseEvent.deviceId)
-                && Objects.equals(deviceName, baseEvent.deviceName)
+        return Objects.equals(eventId, baseEvent.eventId) && Objects.equals(createdAt, baseEvent.createdAt)
+                && Objects.equals(readAt, baseEvent.readAt) && Objects.equals(deviceId, baseEvent.deviceId)
+                && Objects.equals(deviceName, baseEvent.deviceName) && Objects.equals(deviceType, baseEvent.deviceType)
                 && Objects.equals(topic, baseEvent.topic);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eventId, createdAt, readAt, deviceId, deviceName, topic);
+        return Objects.hash(eventId, createdAt, readAt, deviceId, deviceName, deviceType, topic);
     }
 
     @Override
@@ -226,6 +228,7 @@ public class BaseEvent implements Serializable {
                 ", readAt=" + readAt +
                 ", deviceId='" + deviceId + '\'' +
                 ", deviceName='" + deviceName + '\'' +
+                ", deviceType='" + deviceType + '\'' +
                 ", topic='" + topic + '\'' +
                 '}';
     }

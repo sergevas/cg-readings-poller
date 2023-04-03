@@ -5,7 +5,7 @@ import java.util.StringJoiner;
 
 public enum GrowerDeviceName {
 
-    GROWBAG_PEPPER_0001("0001", "Pepper Grow Bag 01");
+    GROWBAG_PEPPER_0001("0002", "Pepper Grow Bag 01");
 
     private String deviceId;
     private String deviceName;

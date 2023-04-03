@@ -14,6 +14,7 @@ public class ReadingsEventBuilder {
     private String eventId;
     private String deviceId;
     private String deviceName;
+    private String deviceType;
     private String natsSubject;
     private OffsetDateTime createdAt;
     private OffsetDateTime readAt;
@@ -43,6 +44,10 @@ public class ReadingsEventBuilder {
         this.deviceName = deviceName;
         return this;
     }
+    public ReadingsEventBuilder deviceType(String deviceType) {
+        this.deviceType= deviceType;
+        return this;
+    }
 
     public ReadingsEventBuilder natsSubject(String natsSubject) {
         this.natsSubject = natsSubject;
@@ -69,6 +74,7 @@ public class ReadingsEventBuilder {
         readingsEvent.setEventId(eventId);
         readingsEvent.setDeviceId(deviceId);
         readingsEvent.setDeviceName(deviceName);
+        readingsEvent.setDeviceType(deviceType);
         readingsEvent.setTopic(natsSubject);
         readingsEvent.setCreatedAt(createdAt);
         readingsEvent.setReadAt(readAt);

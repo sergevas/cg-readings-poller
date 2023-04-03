@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static dev.sergevas.iot.cg.readings.event.model.MeasurementUnits.*;
-import static dev.sergevas.iot.cg.readings.event.model.SensorTypes.*;
+import static dev.sergevas.iot.cg.readings.shared.model.SensorTypes.*;
 
 @ApplicationScoped
 public class ThpResponseHandler implements GrowlabV1ReadingsHandler<SensorReadingsType> {
@@ -26,6 +26,8 @@ public class ThpResponseHandler implements GrowlabV1ReadingsHandler<SensorReadin
 
     @ConfigProperty(name="device.name.growlabv1")
     String deviceName;
+    @ConfigProperty(name="cg.nats.subject.root")
+    String rootNatsSubject;
 
     @Inject
     ReadingsEventNatsAdapter readingsEventAdapter;
@@ -71,6 +73,7 @@ public class ThpResponseHandler implements GrowlabV1ReadingsHandler<SensorReadin
                 .readAt(sensorReadingsItemType.getsTimestamp())
                 .sensorType(TEMP)
                 .measurementUnit(DEGREE_CELSIUS)
+                .natsSubject(createSubjectName(TEMP))
                 .build(x -> x);
         return readingsEvent;
     }
@@ -85,12 +88,13 @@ public class ThpResponseHandler implements GrowlabV1ReadingsHandler<SensorReadin
                 .readAt(sensorReadingsItemType.getsTimestamp())
                 .sensorType(HUMID)
                 .measurementUnit(PERCENTAGE)
+                .natsSubject(createSubjectName(HUMID))
                 .build(x -> x);
         return readingsEvent;
     }
 
     public ReadingsEvent toPressReadingsEvent(SensorReadingsItemType sensorReadingsItemType) {
-        ReadingsEvent readingsEvent = new ReadingsEventBuilder()
+        return new ReadingsEventBuilder()
                 .data(sensorReadingsItemType.getsData())
                 .eventId(UUID.randomUUID().toString())
                 .deviceId(this.deviceId)
@@ -99,7 +103,14 @@ public class ThpResponseHandler implements GrowlabV1ReadingsHandler<SensorReadin
                 .readAt(sensorReadingsItemType.getsTimestamp())
                 .sensorType(PRESS)
                 .measurementUnit(HECTOPASCAL)
+                .natsSubject(createSubjectName(PRESS))
                 .build(x -> x);
-        return readingsEvent;
+    }
+    public String createSubjectName(String sensorType) {
+        return rootNatsSubject +
+                "." +
+                deviceName +
+                "." +
+                sensorType;
     }
 }

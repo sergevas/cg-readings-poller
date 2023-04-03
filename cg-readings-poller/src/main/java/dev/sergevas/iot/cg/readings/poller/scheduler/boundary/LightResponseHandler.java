@@ -14,7 +14,7 @@ import java.time.ZoneId;
 import java.util.UUID;
 
 import static dev.sergevas.iot.cg.readings.event.model.MeasurementUnits.LUX;
-import static dev.sergevas.iot.cg.readings.event.model.SensorTypes.LIGHT;
+import static dev.sergevas.iot.cg.readings.shared.model.SensorTypes.LIGHT;
 
 @ApplicationScoped
 public class LightResponseHandler implements GrowlabV1ReadingsHandler<SensorReadingsItemType> {
@@ -24,6 +24,8 @@ public class LightResponseHandler implements GrowlabV1ReadingsHandler<SensorRead
 
     @ConfigProperty(name="device.name.growlabv1")
     String deviceName;
+    @ConfigProperty(name="cg.nats.subject.root")
+    String rootNatsSubject;
 
     @Inject
     ReadingsEventNatsAdapter readingsEventAdapter;
@@ -37,7 +39,7 @@ public class LightResponseHandler implements GrowlabV1ReadingsHandler<SensorRead
     }
 
     public ReadingsEvent toReadingsEvent(SensorReadingsItemType sensorReadingsItemType) {
-        ReadingsEvent readingsEvent = new ReadingsEventBuilder()
+        return new ReadingsEventBuilder()
                 .data(sensorReadingsItemType.getsData())
                 .eventId(UUID.randomUUID().toString())
                 .deviceId(this.deviceId)
@@ -46,7 +48,15 @@ public class LightResponseHandler implements GrowlabV1ReadingsHandler<SensorRead
                 .readAt(sensorReadingsItemType.getsTimestamp())
                 .sensorType(LIGHT)
                 .measurementUnit(LUX)
+                .natsSubject(createSubjectName(LIGHT))
                 .build(x -> x);
-        return readingsEvent;
+    }
+
+    public String createSubjectName(String sensorType) {
+        return rootNatsSubject +
+                "." +
+                deviceName +
+                "." +
+                sensorType;
     }
 }

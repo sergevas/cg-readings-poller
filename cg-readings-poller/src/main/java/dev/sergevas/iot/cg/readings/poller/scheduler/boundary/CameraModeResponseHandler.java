@@ -13,7 +13,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.UUID;
 
-import static dev.sergevas.iot.cg.readings.event.model.SensorTypes.CAMERA_MODE;
+import static dev.sergevas.iot.cg.readings.shared.model.SensorTypes.CAMERA_MODE;
 
 @ApplicationScoped
 public class CameraModeResponseHandler implements GrowlabV1ReadingsHandler<CameraModeType> {
@@ -23,6 +23,9 @@ public class CameraModeResponseHandler implements GrowlabV1ReadingsHandler<Camer
 
     @ConfigProperty(name="device.name.growlabv1")
     String deviceName;
+
+    @ConfigProperty(name="cg.nats.subject.root")
+    String rootNatsSubject;
 
     @Inject
     ReadingsEventNatsAdapter readingsEventAdapter;
@@ -36,7 +39,7 @@ public class CameraModeResponseHandler implements GrowlabV1ReadingsHandler<Camer
     }
 
     public ReadingsEvent toReadingsEvent(CameraModeType sensorReadingsItemType) {
-        ReadingsEvent readingsEvent = new ReadingsEventBuilder()
+        return new ReadingsEventBuilder()
                 .data(sensorReadingsItemType.getMode().value())
                 .eventId(UUID.randomUUID().toString())
                 .deviceId(this.deviceId)
@@ -44,7 +47,15 @@ public class CameraModeResponseHandler implements GrowlabV1ReadingsHandler<Camer
                 .createdAt(OffsetDateTime.now(ZoneId.of("GMT")))
                 .readAt(sensorReadingsItemType.getModeTimestamp())
                 .sensorType(CAMERA_MODE)
+                .natsSubject(createSubjectName(CAMERA_MODE))
                 .build(x -> x);
-        return readingsEvent;
+    }
+
+    public String createSubjectName(String sensorType) {
+        return rootNatsSubject +
+                "." +
+                deviceName +
+                "." +
+                sensorType;
     }
 }
