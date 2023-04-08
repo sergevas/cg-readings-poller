@@ -10,7 +10,7 @@ import javax.ws.rs.core.Response;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 
-@Path("/cg/device/grower")
+@Path("/cg/gateway/device/grower")
 public class GrowerDataReceiverResource {
 
     @Inject
